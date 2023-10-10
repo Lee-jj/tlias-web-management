@@ -37,7 +37,7 @@ public class EmpServiceImpl implements EmpService {
         PageHelper.startPage(page, pageSize);
         
         // 执行查询操作
-        Page<Emp> p = (Page<Emp>) empMapper.list();
+        Page<Emp> p = (Page<Emp>) empMapper.list(name, gender, begin, end);
 
         // 封装PageBean
         PageBean pageBean = new PageBean(p.getTotal(), p.getResult());

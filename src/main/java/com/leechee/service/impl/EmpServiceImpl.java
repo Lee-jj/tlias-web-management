@@ -1,6 +1,7 @@
 package com.leechee.service.impl;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +49,16 @@ public class EmpServiceImpl implements EmpService {
     @Override
     public void delete(List<Integer> ids) {
         empMapper.deleteById(ids);        
+    }
+
+    @Override
+    public void insert(Emp emp) {
+        // 补充缺失的时间
+        emp.setCreateTime(LocalDateTime.now());
+        emp.setUpdateTime(LocalDateTime.now());
+
+        empMapper.add(emp);
+        
     }
 
     

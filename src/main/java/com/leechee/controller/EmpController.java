@@ -3,6 +3,7 @@ package com.leechee.controller;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.leechee.pojo.Result;
+import com.leechee.pojo.Emp;
 import com.leechee.pojo.PageBean;
 import com.leechee.service.EmpService;
 
@@ -16,6 +17,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
@@ -44,6 +47,15 @@ public class EmpController {
         log.info("删除员工，参数: {}", ids);
 
         empService.delete(ids);
+
+        return Result.success();
+    }
+
+    @PostMapping("/emps")
+    public Result insert(@RequestBody Emp emp) {
+        log.info("新增员工，参数: {}", emp);
+
+        empService.insert(emp);
 
         return Result.success();
     }

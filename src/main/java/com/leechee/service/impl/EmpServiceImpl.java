@@ -1,6 +1,7 @@
 package com.leechee.service.impl;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,4 +44,11 @@ public class EmpServiceImpl implements EmpService {
         PageBean pageBean = new PageBean(p.getTotal(), p.getResult());
         return pageBean;
     }
+
+    @Override
+    public void delete(List<Integer> ids) {
+        empMapper.deleteById(ids);        
+    }
+
+    
 }

@@ -19,4 +19,6 @@ public interface EmpMapper {
     // 使用PageHelper插件简化上述操作，进行正常查询即可
     // @Select("select * from emp")
     public List<Emp> list(String name, Short gender, LocalDate begin, LocalDate end);
+
+    public void deleteById(List<Integer> ids);
 }

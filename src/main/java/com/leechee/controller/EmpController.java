@@ -9,10 +9,13 @@ import com.leechee.service.EmpService;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
@@ -36,4 +39,12 @@ public class EmpController {
         return Result.success(pageBean);
     }
     
+    @DeleteMapping("emps/{ids}")
+    public Result delete(@PathVariable List<Integer> ids) {
+        log.info("删除员工，参数: {}", ids);
+
+        empService.delete(ids);
+
+        return Result.success();
+    }
 }

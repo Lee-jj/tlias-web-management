@@ -18,5 +18,15 @@
         </where>
         order by update_time desc
     </select>
-    
+
+    <!-- deleteById --> 
+
+    <!-- 批量删除员工 -->
+    <delete id="deleteById">
+        delete 
+        from emp where id in
+        <foreach collection="ids" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>    
 </mapper>

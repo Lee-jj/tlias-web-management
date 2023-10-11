@@ -27,4 +27,9 @@ public interface EmpMapper {
     @Insert("insert into emp(username, name, gender, image, job, entrydate, dept_id, create_time, update_time) "  + 
             "value (#{username}, #{name}, #{gender}, #{image}, #{job}, #{entrydate}, #{deptId}, #{createTime}, #{updateTime})")
     public void add(Emp emp);
+
+    @Select("select * from emp where id = #{id}")
+    public Emp getUserById(Integer id);
+
+    public void update(Emp emp);
 }

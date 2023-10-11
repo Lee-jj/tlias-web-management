@@ -61,5 +61,18 @@ public class EmpServiceImpl implements EmpService {
         
     }
 
+    @Override
+    public Emp getUserById(Integer id) {
+        return empMapper.getUserById(id);
+    }
+
+    @Override
+    public void update(Emp emp) {
+        // 补充缺失时间
+        emp.setUpdateTime(LocalDateTime.now());
+
+        empMapper.update(emp);
+    }
+
     
 }

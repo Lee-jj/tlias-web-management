@@ -1,5 +1,8 @@
 package com.leechee.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -8,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.leechee.pojo.Emp;
 import com.leechee.pojo.Result;
 import com.leechee.service.EmpService;
+import com.leechee.utils.JwtUtils;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -24,6 +28,18 @@ public class LoginController {
 
         Emp e = empService.login(emp);
 
-        return e == null ? Result.error("用户名或密码错误") : Result.success();
+        // 登录成功，生成并下发令牌
+        if (e != null) {
+            Map<String, Object> claims = new HashMap<>();
+            claims.put("id", e.getId());
+            claims.put("name", e.getName());
+            claims.put("username", e.getUsername());
+
+            String jwt = JwtUtils.generateJwt(null);
+            return Result.success(jwt);
+        }
+
+        // 登录失败
+        return Result.error("用户名或密码错误");
     }
 }

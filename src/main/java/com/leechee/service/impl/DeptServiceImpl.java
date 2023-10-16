@@ -5,8 +5,10 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.leechee.mapper.DeptMapper;
+import com.leechee.mapper.EmpMapper;
 import com.leechee.pojo.Dept;
 import com.leechee.service.DeptService;
 
@@ -15,15 +17,21 @@ public class DeptServiceImpl implements DeptService {
 
     @Autowired
     private DeptMapper deptMapper;
+    @Autowired
+    private EmpMapper empMapper;
 
     @Override
     public List<Dept> list() {
         return deptMapper.list();
     }
 
+    @Transactional
     @Override
     public void delete(Integer id) {
         deptMapper.deleteById(id);
+
+        // 根据删除的部门，也要删除该部门的所有员工
+        empMapper.deleteByDeptId(id);
     }
 
     @Override

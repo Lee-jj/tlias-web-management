@@ -3,6 +3,7 @@ package com.leechee.mapper;
 import java.time.LocalDate;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -35,4 +36,7 @@ public interface EmpMapper {
 
     @Select("select * from emp where username = #{username} and password = #{password}")
     public Emp getUserByNameAndPassword(Emp emp);
+
+    @Delete("delete from emp where dept_id = #{deptId}")
+    public void deleteByDeptId(Integer deptId);
 }
